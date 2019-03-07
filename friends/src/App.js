@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { createStore, applyMiddleware , compose} from 'redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger'
@@ -7,6 +8,8 @@ import rootReducer from './reducers';
 
 import types from './constants';
 import Friends from './components/Friends';
+import Header from './components/Header';
+import AddFriend from './components/AddFriend';
 
 const customMiddlewareToSaveUserToke = store => next => action => {
   if(action.types === types.LOGIN_SUCCESS) {
@@ -28,7 +31,13 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Friends />
+        <Router>
+          <>
+            <Header />
+            <Route exact path="/" component={Friends} />
+            <Route path="/add" component={AddFriend} />
+          </>
+        </Router>
       </Provider>
     );
   }

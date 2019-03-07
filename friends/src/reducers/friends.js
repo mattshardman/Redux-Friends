@@ -11,6 +11,8 @@ export const friends = (state = defaultState, action) => {
       return { loading: true };
     case types.GET_FRIENDS:
       return { friends: action.payload };
+    case types.ADD_FRIENDS:
+      return { friends: action.payload };
     default:
       return state;
   }

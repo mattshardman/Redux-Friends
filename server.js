@@ -76,9 +76,7 @@ app.post('/api/login', (req, res) => {
 });
 
 app.get('/api/friends', authenticator, (req, res) => {
-  setTimeout(() => {
     res.send(friends);
-  }, 1000);
 });
 
 app.get('/api/friends/:id', authenticator, (req, res) => {
@@ -92,6 +90,7 @@ app.get('/api/friends/:id', authenticator, (req, res) => {
 });
 
 app.post('/api/friends', authenticator, (req, res) => {
+  console.log(req.body)
   const friend = { id: getNextId(), ...req.body };
 
   friends = [...friends, friend];
