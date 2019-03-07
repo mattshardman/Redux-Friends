@@ -1,10 +1,17 @@
-import axios from 'axios';
+import types from "../constants";
 
-export const friends = (state = [], action) => {
-    switch (action.type) {
-        case 'LOADING': 
-            return { loading: true };
-        default:
-            return state;
-    }
-}
+const defaultState = {
+  friends: [],
+  loading: true
+};
+
+export const friends = (state = defaultState, action) => {
+  switch (action.type) {
+    case types.LOADING:
+      return { loading: true };
+    case types.GET_FRIENDS:
+      return { friends: action.payload };
+    default:
+      return state;
+  }
+};

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { getFriends } from '../actions';
 
-function Friends({ loading, getFriends }) {
+function Friends({ loading, friends, getFriends }) {
     useEffect(() => {
         getFriends();
     }, []);
@@ -14,7 +14,14 @@ function Friends({ loading, getFriends }) {
 
     return (
         <div>
-            hi
+        {
+            friends.map(friend => 
+            <div>
+                <p>{friend.name}</p>
+                <p>{friend.age}</p>
+                <p>{friend.email}</p>
+            </div>
+        )}
         </div>
     );
 }

@@ -1,3 +1,5 @@
 export default {
     LOGIN_SUCCESS: 'LOGIN_SUCCESS',
+    LOADING: 'LOADING',
+    GET_FRIENDS: 'GET_FRIENDS'
 };
