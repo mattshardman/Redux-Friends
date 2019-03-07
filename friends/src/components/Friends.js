@@ -1,16 +1,26 @@
-import React, { useEffect } from 'redux';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 
-function Friends() {
+import { getFriends } from '../actions';
 
+function Friends({ loading, getFriends }) {
     useEffect(() => {
-        
+        getFriends();
     }, []);
+
+    if (loading) {
+        return <div>Loading...</div>
+    }
 
     return (
         <div>
-            
+            hi
         </div>
-    )
+    );
 }
 
-export default Friends;
+const mapStateToProps = ({friends}) => {
+    return friends;
+}
+
+export default connect(mapStateToProps, { getFriends })(Friends);
