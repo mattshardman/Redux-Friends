@@ -1,18 +1,12 @@
 import types from "../constants";
 
-const defaultState = {
-  friends: [],
-  loading: true
-};
-
-export const friends = (state = defaultState, action) => {
+export const friends = (state = [], action) => {
   switch (action.type) {
-    case types.LOADING:
-      return { loading: true };
     case types.GET_FRIENDS:
-      return { friends: action.payload };
     case types.ADD_FRIENDS:
-      return { friends: action.payload };
+      return action.payload;
+    case types.DELETE_FRIENDS:
+      return state.filter(friend => friend.id !== action.payload.id);
     default:
       return state;
   }

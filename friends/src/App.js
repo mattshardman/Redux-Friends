@@ -4,12 +4,16 @@ import { createStore, applyMiddleware , compose} from 'redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger'
 import { Provider } from 'react-redux';
+import styled from 'styled-components';
+
 import rootReducer from './reducers';
 
 import types from './constants';
 import Friends from './components/Friends';
 import Header from './components/Header';
 import AddFriend from './components/AddFriend';
+
+
 
 const customMiddlewareToSaveUserToke = store => next => action => {
   if(action.types === types.LOGIN_SUCCESS) {
@@ -27,6 +31,12 @@ const store = createStore(
   )
 );
 
+const Container = styled.main`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`;
+
 class App extends Component {
   render() {
     return (
@@ -34,8 +44,10 @@ class App extends Component {
         <Router>
           <>
             <Header />
-            <Route exact path="/" component={Friends} />
-            <Route path="/add" component={AddFriend} />
+            <Container>
+              <Route exact path="/" component={Friends} />
+              <Route path="/add" component={AddFriend} />
+            </Container>
           </>
         </Router>
       </Provider>

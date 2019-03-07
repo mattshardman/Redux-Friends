@@ -1,33 +1,56 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from "react";
+import styled from "styled-components";
+import { connect } from "react-redux";
 
-import { getFriends } from '../actions';
+import { getFriends, deleteFriend, likeFriend } from "../actions";
+import Friend from "./FriendCard";
 
-function Friends({ loading, friends, getFriends }) {
-    useEffect(() => {
-        getFriends();
-    }, []);
+const CardWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 60px;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #eaeaea;
+  overflow: hidden;
+`;
 
-    if (loading) {
-        return <div>Loading...</div>
-    }
+function Friends({ friends, liked, loading, getFriends, deleteFriend, likeFriend }) {
+  useEffect(() => {
+    getFriends();
+  }, []);
 
-    return (
-        <div>
-        {
-            friends.map(friend => 
-            <div>
-                <p>{friend.name}</p>
-                <p>{friend.age}</p>
-                <p>{friend.email}</p>
-            </div>
-        )}
-        </div>
-    );
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  console.log(liked)
+
+  return (
+    <CardWrapper>
+      {friends.map(friend => (
+        liked.includes(friend.id) ?
+        null :
+        <Friend
+          key={friend.id}
+          {...friend}
+          deleteFriend={deleteFriend}
+          likeFriend={likeFriend}
+        />
+      ))}
+    </CardWrapper>
+  );
 }
 
-const mapStateToProps = ({friends}) => {
-    return friends;
-}
+const mapStateToProps = ({ friends, liked, loading }) => {
+  return { liked, friends };
+};
 
-export default connect(mapStateToProps, { getFriends })(Friends);
+export default connect(
+  mapStateToProps,
+  { getFriends, deleteFriend, likeFriend }
+)(Friends);

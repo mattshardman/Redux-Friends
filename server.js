@@ -6,41 +6,47 @@ const app = express();
 const token =
   'eyJ1c2VySWQiOiJiMDhmODZhZi0zNWRhLTQ4ZjItOGZhYi1jZWYzOTA0NjYwYmQifQ';
 
-let nextId = 6;
+let nextId = 7;
 
 let friends = [
   {
     id: 1,
+    image: 'https://image.flaticon.com/icons/svg/145/145859.svg',
     name: 'Ben',
     age: 30,
     email: 'ben@lambdaschool.com'
   },
   {
     id: 2,
+    image: 'https://image.flaticon.com/icons/svg/145/145867.svg',
     name: 'Austen',
     age: 45,
     email: 'austen@lambdaschool.com'
   },
   {
     id: 3,
+    image: 'https://image.flaticon.com/icons/svg/265/265674.svg',
     name: 'Ryan',
     age: 15,
     email: 'ryan@lambdaschool.com'
   },
   {
     id: 4,
+    image: 'https://image.flaticon.com/icons/svg/265/265668.svg',
     name: 'Dustin',
     age: 25,
     email: 'D-munny@lambdaschool.com'
   },
   {
     id: 5,
+    image: 'https://image.flaticon.com/icons/svg/265/265668.svg',
     name: 'Sean',
     age: 35,
     email: 'sean@lambdaschool.com'
   },
   {
     id: 6,
+    image: 'https://image.flaticon.com/icons/svg/145/145852.svg',
     name: 'Michelle',
     age: 67,
     email: 'michelle@gmail.com'
@@ -53,7 +59,6 @@ app.use(cors());
 
 function authenticator(req, res, next) {
   const { authorization } = req.headers;
-  console.log(authorization)
   if (authorization === token) {
     next();
   } else {
@@ -90,7 +95,6 @@ app.get('/api/friends/:id', authenticator, (req, res) => {
 });
 
 app.post('/api/friends', authenticator, (req, res) => {
-  console.log(req.body)
   const friend = { id: getNextId(), ...req.body };
 
   friends = [...friends, friend];

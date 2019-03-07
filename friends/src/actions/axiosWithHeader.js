@@ -12,3 +12,9 @@ export const axiosPostWithHeader = (url, data) => axios({
     headers: { "authorization": "eyJ1c2VySWQiOiJiMDhmODZhZi0zNWRhLTQ4ZjItOGZhYi1jZWYzOTA0NjYwYmQifQ" },
     data
 });
+
+export const axiosDeleteWithHeader = (url, data) => axios({
+    method: 'delete',
+    baseURL: `http://localhost:5000/api/${url}`,
+    headers: { "authorization": "eyJ1c2VySWQiOiJiMDhmODZhZi0zNWRhLTQ4ZjItOGZhYi1jZWYzOTA0NjYwYmQifQ" },
+});

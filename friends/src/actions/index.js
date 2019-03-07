@@ -1,4 +1,4 @@
-import { axiosGetWithHeader, axiosPostWithHeader} from './axiosWithHeader';
+import { axiosGetWithHeader, axiosPostWithHeader, axiosDeleteWithHeader } from './axiosWithHeader';
 import types from '../constants';
 
 export const getFriends = () => dispatch => {
@@ -12,15 +12,22 @@ export const getFriends = () => dispatch => {
 };
 
 export const addFriend = friend => dispatch => {
-  console.log(friend)
-  dispatch({ type: types.LOADING });
   axiosPostWithHeader('friends', friend).then(r => {
-    console.log(r)
     dispatch({
-        type: types.GET_FRIENDS,
+        type: types.ADD_FRIENDS,
         payload: r.data
       });
   });
 }
 
+export const deleteFriend = id => dispatch => {
+  dispatch({ type: types.DELETE_FRIENDS, payload: { id } });
+  axiosDeleteWithHeader(`friends/${id}`);
+}
 
+export const likeFriend = id => {
+  return {
+    type: types.LIKE_FRIEND,
+    payload: { id }
+  }
+}
