@@ -25,6 +25,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
+        <div>hi</div>y
       </Provider>
     );
   }
